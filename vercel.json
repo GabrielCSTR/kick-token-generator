@@ -1,16 +1,47 @@
 {
   "version": 2,
-  "framework": null,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/**",
+      "use": "@vercel/static"
     }
-  },
-  "outputDirectory": "client",
-  "rewrites": [
-    { "source": "/auth/login", "destination": "/api/server" },
-    { "source": "/auth/callback", "destination": "/api/server" },
-    { "source": "/auth/refresh", "destination": "/api/server" },
-    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "routes": [
+    {
+      "src": "/auth/(.*)",
+      "dest": "src/main.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "client/assets/$1"
+    },
+    {
+      "src": "/callback.html",
+      "dest": "client/callback.html"
+    },
+    {
+      "src": "/script.js",
+      "dest": "client/script.js"
+    },
+    {
+      "src": "/style.css",
+      "dest": "client/style.css"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "client/assets/favicon.svg"
+    },
+    {
+      "src": "/",
+      "dest": "client/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts"
+    }
   ]
 }
