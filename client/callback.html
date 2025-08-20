@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -24,12 +24,12 @@
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            Voltar
+            Back
         </a>
     </header>
 
     <div class="container fade-in">
-        <!-- Container de loading - inicialmente escondido -->
+        <!-- Loading container - initially hidden -->
         <div id="loading-container" class="fade-in" style="display: none;">
             <div class="section-heading">
                 <div class="section-icon">
@@ -39,21 +39,21 @@
                         <path d="M12 8v4l2 2"></path>
                     </svg>
                 </div>
-                Processando Token
+                Processing Token
             </div>
             
             <div class="alert alert-warning">
                 <div class="alert-icon">⌛</div>
                 <div class="alert-content">
-                    <div class="alert-title">Finalizando autenticação</div>
+                    <div class="alert-title">Finalizing authentication</div>
                     <div class="alert-message">
-                        Usando suas credenciais para completar a autenticação. Por favor, aguarde...
+                        Using your credentials to complete authentication. Please wait...
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Container de erro - inicialmente escondido -->
+        <!-- Error container - initially hidden -->
         <div id="error-container" class="fade-in" style="display: none;">
             <div class="section-heading">
                 <div class="section-icon">
@@ -63,15 +63,15 @@
                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
                     </svg>
                 </div>
-                Erro ao Gerar Token
+                Error Generating Token
             </div>
 
             <div class="alert alert-danger">
                 <div class="alert-icon">❌</div>
                 <div class="alert-content">
-                    <div class="alert-title">Falha na autenticação</div>
+                    <div class="alert-title">Authentication Failed</div>
                     <div class="alert-message" id="error-message">
-                        Ocorreu um erro durante a geração do token.
+                        An error occurred during token generation.
                     </div>
                 </div>
             </div>
@@ -80,11 +80,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
-                Tentar novamente
+                Try Again
             </a>
         </div>
 
-        <!-- Container de sucesso - inicialmente escondido -->
+        <!-- Success container - initially hidden -->
         <div id="success-container" class="fade-in" style="display: none;">
             <div class="section-heading">
                 <div class="section-icon">
@@ -93,15 +93,15 @@
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                 </div>
-                Tokens Gerados com Sucesso!
+                Tokens Successfully Generated!
             </div>
 
             <div class="alert alert-success">
                 <div class="alert-icon">✅</div>
                 <div class="alert-content">
-                    <div class="alert-title">Autenticação bem-sucedida</div>
+                    <div class="alert-title">Authentication Successful</div>
                     <div class="alert-message">
-                        Os tokens foram gerados com sucesso. Guarde-os em um local seguro e não os compartilhe.
+                        The tokens have been successfully generated. Keep them in a secure location and do not share them.
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                        Copiar
+                        Copy
                     </button>
                 </div>
                 
@@ -143,7 +143,7 @@
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                        Copiar
+                        Copy
                     </button>
                 </div>
                 
@@ -160,23 +160,23 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                     </svg>
-                    Renovar Token
+                    Refresh Token
                 </button>
                 <a href="index.html" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                     </svg>
-                    Gerar Novo Token
+                    Generate New Token
                 </a>
             </div>
             
             <div class="token-container">
-                <label class="token-label">Como usar o token na API</label>
+                <label class="token-label">How to use the token in the API</label>
                 <pre style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 15px; color: var(--text-color); overflow-x: auto; margin-bottom: 0; white-space: pre-wrap; word-break: break-word;">curl --location 'https://api.kick.com/public/v1/chat' \
 --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
 --header 'Content-Type: application/json' \
 --data '{
-    "content": "Olá do meu bot!",
+    "content": "Hello from my bot!",
     "type": "bot"
 }'</pre>
             </div>
@@ -185,8 +185,8 @@
 
      <footer class="footer">
         <p>
-            Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
-            Essa ferramenta foi criada por <a href="https://gbrldev.com.br" target="_blank">GBRLDEV</a> <br>
+            Kick Token Generator © 2025 | Not officially affiliated with Kick.tv <br>
+            This tool was created by <a href="https://gbrldev.com" target="_blank">GBRLDEV</a> <br>
         </p>
     </footer>
 
@@ -226,12 +226,12 @@
                 });
                 
                 if (!clientSecret) {
-                    throw new Error('CLIENT SECRET não encontrado. Por favor, volte e tente novamente.');
+                    throw new Error('CLIENT SECRET not found. Please go back and try again.');
                 }
                 
-                // Redirecionar para a URL de callback com o client secret
+                // Redirect to callback URL with client secret
                 const callbackUrl = `/auth/callback?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}&client_secret=${encodeURIComponent(clientSecret)}`;
-                console.log('Redirecionando para:', callbackUrl);
+                console.log('Redirecting to:', callbackUrl);
                 window.location.href = callbackUrl;
             } catch (error) {
                 document.getElementById('loading-container').style.display = 'none';
@@ -262,9 +262,9 @@
                         const hours = Math.floor(expiresIn / 3600);
                         const minutes = Math.floor((expiresIn % 3600) / 60);
                         document.getElementById('expires-in').textContent = 
-                            `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                            `${hours} hour${hours !== 1 ? 's' : ''} and ${minutes} minute${minutes !== 1 ? 's' : ''}`;
                     } else {
-                        document.getElementById('expires-in').textContent = 'Desconhecido';
+                        document.getElementById('expires-in').textContent = 'Unknown';
                     }
                     
                     // Tipo do token

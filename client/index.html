@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <meta name="description" content="Gere tokens de autenticação para a API da Kick.tv de forma segura e fácil. Semelhante ao TwitchTokenGenerator, mas para a plataforma Kick.">
+    <meta name="description" content="Generate authentication tokens for the Kick.tv API securely and easily. Similar to TwitchTokenGenerator, but for the Kick platform.">
 </head>
 <body>
     <header>
@@ -36,21 +36,21 @@
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
             </div>
-            Gerador de Tokens para a API da Kick
+            Token Generator for the Kick API
         </div>
         
         <p class="section-description">
-            Esta ferramenta permite gerar tokens de acesso OAuth para a API da Kick.tv de forma segura.
-            Insira suas credenciais de aplicativo e selecione os escopos necessários para sua aplicação.
+            This tool allows you to generate OAuth access tokens for the Kick.tv API securely.
+            Enter your application credentials and select the necessary scopes for your application.
         </p>
 
         <div class="alert alert-warning">
             <div class="alert-icon">⚠️</div>
             <div class="alert-content">
-                <div class="alert-title">Atenção à segurança</div>
+                <div class="alert-title">Security Notice</div>
                 <div class="alert-message">
-                    Nunca compartilhe seus tokens de acesso ou suas credenciais de aplicativo. 
-                    Eles fornecem acesso à sua conta Kick e podem ser usados para realizar ações em seu nome.
+                    Never share your access tokens or application credentials.
+                    They provide access to your Kick account and can be used to perform actions on your behalf.
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     <path d="M9 21V9"></path>
                 </svg>
             </div>
-            Suas Credenciais de Aplicativo
+            Your Application Credentials
         </div>
 
         <div class="token-container">
@@ -78,13 +78,13 @@
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
-                    Mostrar
+                    Show
                 </button>
             </div>
 
             <p class="helper-text">
-                Para obter suas credenciais, você precisa registrar um aplicativo no 
-                <a href="https://kick.com/developer" target="_blank">Painel de Desenvolvedores da Kick</a>.
+                To get your credentials, you need to register an application in the 
+                <a href="https://kick.com/developer" target="_blank">Kick Developer Dashboard</a>.
             </p>
         </div>
 
@@ -95,7 +95,7 @@
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
             </div>
-            Selecione os Escopos Necessários
+            Select Required Scopes
         </div>
 
         <div class="scopes-grid">
@@ -103,7 +103,7 @@
                 <input type="checkbox" id="user-read" class="scope-checkbox" value="user:read" checked>
                 <div class="scope-info">
                     <label for="user-read" class="scope-name">user:read</label>
-                    <div class="scope-description">Visualize informações do usuário no Kick, incluindo nome de usuário, ID do streamer, etc.</div>
+                    <div class="scope-description">View user information on Kick, including username, streamer ID, etc.</div>
                 </div>
             </div>
             
@@ -111,7 +111,7 @@
                 <input type="checkbox" id="channel-read" class="scope-checkbox" value="channel:read">
                 <div class="scope-info">
                     <label for="channel-read" class="scope-name">channel:read</label>
-                    <div class="scope-description">Veja informações do canal no Kick, incluindo descrição do canal, categoria, etc.</div>
+                    <div class="scope-description">View channel information on Kick, including channel description, category, etc.</div>
                 </div>
             </div>
             
@@ -119,7 +119,7 @@
                 <input type="checkbox" id="channel-write" class="scope-checkbox" value="channel:write">
                 <div class="scope-info">
                     <label for="channel-write" class="scope-name">channel:write</label>
-                    <div class="scope-description">Atualizar metadados de transmissão ao vivo para um canal com base no ID do canal</div>
+                    <div class="scope-description">Update live stream metadata for a channel based on channel ID</div>
                 </div>
             </div>
             
@@ -127,7 +127,7 @@
                 <input type="checkbox" id="chat-write" class="scope-checkbox" value="chat:write">
                 <div class="scope-info">
                     <label for="chat-write" class="scope-name">chat:write</label>
-                    <div class="scope-description">Envie mensagens de bate-papo e permita que bots de bate-papo postem em seu bate-papo</div>
+                    <div class="scope-description">Send chat messages and allow chatbots to post in your chat</div>
                 </div>
             </div>
             
@@ -135,7 +135,7 @@
                 <input type="checkbox" id="streamkey-read" class="scope-checkbox" value="streamkey:read">
                 <div class="scope-info">
                     <label for="streamkey-read" class="scope-name">streamkey:read</label>
-                    <div class="scope-description">Leia o URL de fluxo e a chave de fluxo de um usuário</div>
+                    <div class="scope-description">Read a user's stream URL and stream key</div>
                 </div>
             </div>
             
@@ -143,7 +143,7 @@
                 <input type="checkbox" id="events-subscribe" class="scope-checkbox" value="events:subscribe">
                 <div class="scope-info">
                     <label for="events-subscribe" class="scope-name">events:subscribe</label>
-                    <div class="scope-description">Assine todos os eventos do canal no Kick, por exemplo, mensagens de bate-papo, seguidores, assinaturas</div>
+                    <div class="scope-description">Subscribe to all channel events on Kick, e.g., chat messages, followers, subscriptions</div>
                 </div>
             </div>
 
@@ -151,7 +151,7 @@
                 <input type="checkbox" id="moderation-ban" class="scope-checkbox" value="moderation:ban">
                 <div class="scope-info">
                     <label for="moderation-ban" class="scope-name">moderation:ban</label>
-                    <div class="scope-description">Executar ações de moderação para moderadores</div>
+                    <div class="scope-description">Execute moderation actions for moderators</div>
                 </div>
             </div>
         </div>
@@ -160,15 +160,15 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
             </svg>
-            Gerar Token de Acesso
+            Generate Access Token
         </button>
     </div>
 
     <footer class="footer">
         <p>
-            Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
-            Essa ferramenta foi criada por <a href="https://gbrldev.com.br" target="_blank">GBRLDEV</a> <br>
-            Inspirado no <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
+            Kick Token Generator © 2025 | Not officially affiliated with Kick.tv <br>
+            This tool was created by <a href="https://gbrldev.com" target="_blank">GBRLDEV</a> <br>
+            Inspired by <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
         </p>
     </footer>
 
