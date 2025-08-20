@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Kick Token Generator</title>
+      <defs>
+        <pattern id="checkerPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="10" height="10" fill="#1a1a1a"/>
+            <rect x="10" y="10" width="10" height="10" fill="#1a1a1a"/>
+            <rect x="10" y="0" width="10" height="10" fill="#222222"/>
+            <rect x="0" y="10" width="10" height="10" fill="#222222"/>
+        </pattern>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="glow"/>
+            <feComposite in="glow" in2="SourceGraphic" operator="over"/>
+        </filter>
+    </defs>
+    
+    <!-- Logo Kick -->
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="#1A1A1A" stroke="#53FC18" stroke-width="2" cx="24" cy="24" r="22"/>
+        
+        <!-- "K" estilizado dentro do círculo -->
+        <path d="M16,14 L16,34 L21,34 L21,25 L29,34 L35,34 L25,24 L35,14 L29,14 L21,22 L21,14 Z" fill="#53FC18"/>
+    </g>
+</svg>

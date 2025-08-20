@@ -2,51 +2,164 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token Gerado - Kick Token Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#121212">
+    <meta name="color-scheme" content="dark light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Token Gerado | Kick Token Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 Token Gerado com Sucesso!</h1>
-        
-        <div id="error-container" class="error" style="display: none;">
-            <h2>❌ Erro</h2>
-            <p id="error-message"></p>
-            <a href="/" class="btn-secondary">Tentar Novamente</a>
+    <header>
+        <div class="logo">
+            <img src="assets/logo.svg" alt="Kick Token Generator Logo">
+            <h1>Kick Token Generator</h1>
+        </div>
+        <a href="index.html" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Voltar
+        </a>
+    </header>
+
+    <div class="container fade-in">
+        <!-- Container de erro - inicialmente escondido -->
+        <div id="error-container" class="fade-in" style="display: none;">
+            <div class="section-heading">
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                Erro ao Gerar Token
+            </div>
+
+            <div class="alert alert-danger">
+                <div class="alert-icon">❌</div>
+                <div class="alert-content">
+                    <div class="alert-title">Falha na autenticação</div>
+                    <div class="alert-message" id="error-message">
+                        Ocorreu um erro durante a geração do token.
+                    </div>
+                </div>
+            </div>
+
+            <a href="index-new.html" class="btn btn-primary btn-block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Tentar novamente
+            </a>
         </div>
 
-        <div id="success-container" style="display: none;">
+        <!-- Container de sucesso - inicialmente escondido -->
+        <div id="success-container" class="fade-in" style="display: none;">
+            <div class="section-heading">
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#53fc18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                Tokens Gerados com Sucesso!
+            </div>
+
+            <div class="alert alert-success">
+                <div class="alert-icon">✅</div>
+                <div class="alert-content">
+                    <div class="alert-title">Autenticação bem-sucedida</div>
+                    <div class="alert-message">
+                        Os tokens foram gerados com sucesso. Guarde-os em um local seguro e não os compartilhe.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Access Token -->
             <div class="token-container">
-                <h3>Access Token:</h3>
+                <label class="token-label">Access Token</label>
                 <div class="token-field">
                     <input type="text" id="access-token" readonly>
-                    <button onclick="copyToken('access-token')" class="btn-copy">📋 Copiar</button>
+                    <button onclick="copyToken('access-token')" class="btn-copy">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copiar
+                    </button>
+                </div>
+                
+                <div class="token-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Expira em</div>
+                        <div class="meta-value" id="expires-in">-</div>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <div class="meta-label">Tipo de Token</div>
+                        <div class="meta-value" id="token-type">Bearer</div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Refresh Token -->
             <div class="token-container" id="refresh-container" style="display: none;">
-                <h3>Refresh Token:</h3>
+                <label class="token-label">Refresh Token</label>
                 <div class="token-field">
                     <input type="text" id="refresh-token" readonly>
-                    <button onclick="copyToken('refresh-token')" class="btn-copy">📋 Copiar</button>
+                    <button onclick="copyToken('refresh-token')" class="btn-copy">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copiar
+                    </button>
                 </div>
-            </div>
-
-            <div class="info-container">
-                <p><strong>Expira em:</strong> <span id="expires-in"></span></p>
-                <p><strong>Scopes:</strong> <span id="scopes"></span></p>
-                <p><strong>Tipo:</strong> <span id="token-type"></span></p>
+                
+                <div class="token-meta">
+                    <div class="meta-item" style="grid-column: 1/-1;">
+                        <div class="meta-label">Escopos concedidos</div>
+                        <div class="meta-value" id="scopes">-</div>
+                    </div>
+                </div>
             </div>
 
             <div class="actions">
-                <button id="refresh-btn" class="btn-secondary" style="display: none;">
-                    🔄 Renovar Token
+                <button id="refresh-btn" class="btn btn-secondary" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                    </svg>
+                    Renovar Token
                 </button>
-                <a href="/" class="btn-primary">Gerar Novo Token</a>
+                <a href="index.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Gerar Novo Token
+                </a>
+            </div>
+            
+            <div class="token-container">
+                <label class="token-label">Como usar o token na API</label>
+                <pre style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 15px; color: var(--text-color); overflow-x: auto; margin-bottom: 0;">curl -H "Authorization: Bearer YOUR_ACCESS_TOKEN" https://kick.com/api/v1/user</pre>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>
+            Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
+            Inspirado no <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
+        </p>
+    </footer>
 
     <script>
         // Parse URL parameters
@@ -67,36 +180,99 @@
                 document.getElementById('success-container').style.display = 'block';
                 document.getElementById('access-token').value = accessToken;
                 
+                // Formato de expiração mais amigável
+                if (expiresIn) {
+                    const hours = Math.floor(expiresIn / 3600);
+                    const minutes = Math.floor((expiresIn % 3600) / 60);
+                    document.getElementById('expires-in').textContent = 
+                        `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                } else {
+                    document.getElementById('expires-in').textContent = 'Desconhecido';
+                }
+                
+                // Tipo do token
+                document.getElementById('token-type').textContent = tokenType || 'Bearer';
+                
+                // Se houver refresh token, mostra a seção
                 if (refreshToken) {
                     document.getElementById('refresh-container').style.display = 'block';
                     document.getElementById('refresh-token').value = refreshToken;
-                    document.getElementById('refresh-btn').style.display = 'inline-block';
+                    document.getElementById('refresh-btn').style.display = 'inline-flex';
                 }
                 
-                document.getElementById('expires-in').textContent = expiresIn ? `${expiresIn} segundos` : 'N/A';
-                document.getElementById('scopes').textContent = scope || 'N/A';
-                document.getElementById('token-type').textContent = tokenType || 'Bearer';
+                // Formata os escopos de forma mais legível
+                if (scope) {
+                    document.getElementById('scopes').textContent = scope.split(' ').join(', ');
+                } else {
+                    document.getElementById('scopes').textContent = 'Nenhum escopo específico';
+                }
             }
         }
 
-        function copyToken(elementId) {
+        async function copyToken(elementId) {
             const element = document.getElementById(elementId);
-            element.select();
-            document.execCommand('copy');
+            const tokenText = element.value;
             
             const button = element.nextElementSibling;
-            const originalText = button.textContent;
-            button.textContent = '✅ Copiado!';
+            const originalHTML = button.innerHTML;
+            
+            try {
+                // Usar a nova API Clipboard quando disponível
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(tokenText);
+                } else {
+                    // Fallback para método mais antigo
+                    element.select();
+                    document.execCommand('copy');
+                }
+                
+                // Mostrar mensagem de sucesso
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4cd964" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    Copiado!
+                `;
+                
+                // Adicionar vibração em dispositivos móveis para feedback tátil
+                if (navigator.vibrate && isMobile) {
+                    navigator.vibrate(50);
+                }
+            } catch (err) {
+                console.error('Falha ao copiar texto: ', err);
+                
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    Erro
+                `;
+            }
+            
+            // Restaurar o botão depois de um tempo
             setTimeout(() => {
-                button.textContent = originalText;
+                button.innerHTML = originalHTML;
             }, 2000);
         }
 
         // Refresh token functionality
         document.getElementById('refresh-btn')?.addEventListener('click', async () => {
             const refreshToken = document.getElementById('refresh-token').value;
+            const refreshBtn = document.getElementById('refresh-btn');
+            const originalHTML = refreshBtn.innerHTML;
             
             try {
+                refreshBtn.disabled = true;
+                refreshBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                    </svg>
+                    Renovando...
+                `;
+                
                 const response = await fetch('/auth/refresh', {
                     method: 'POST',
                     headers: {
@@ -109,15 +285,61 @@
                 
                 if (response.ok) {
                     document.getElementById('access-token').value = data.access_token;
+                    
+                    if (data.expires_in) {
+                        const hours = Math.floor(data.expires_in / 3600);
+                        const minutes = Math.floor((data.expires_in % 3600) / 60);
+                        document.getElementById('expires-in').textContent = 
+                            `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                    }
+                    
                     if (data.refresh_token) {
                         document.getElementById('refresh-token').value = data.refresh_token;
                     }
-                    alert('Token renovado com sucesso!');
+                    
+                    // Mostra uma notificação de sucesso
+                    const successAlert = document.createElement('div');
+                    successAlert.className = 'alert alert-success fade-in';
+                    successAlert.style.marginTop = '1rem';
+                    successAlert.innerHTML = `
+                        <div class="alert-icon">✅</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Token renovado</div>
+                            <div class="alert-message">O access token foi renovado com sucesso.</div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('success-container').appendChild(successAlert);
+                    
+                    // Remove a notificação após 5 segundos
+                    setTimeout(() => {
+                        successAlert.remove();
+                    }, 5000);
                 } else {
-                    alert('Erro ao renovar token: ' + (data.message || 'Erro desconhecido'));
+                    throw new Error(data.message || 'Erro desconhecido ao renovar token');
                 }
             } catch (error) {
-                alert('Erro ao renovar token: ' + error.message);
+                // Mostra uma notificação de erro
+                const errorAlert = document.createElement('div');
+                errorAlert.className = 'alert alert-danger fade-in';
+                errorAlert.style.marginTop = '1rem';
+                errorAlert.innerHTML = `
+                    <div class="alert-icon">❌</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Erro ao renovar</div>
+                        <div class="alert-message">${error.message}</div>
+                    </div>
+                `;
+                
+                document.getElementById('success-container').appendChild(errorAlert);
+                
+                // Remove a notificação após 5 segundos
+                setTimeout(() => {
+                    errorAlert.remove();
+                }, 5000);
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.innerHTML = originalHTML;
             }
         });
     </script>

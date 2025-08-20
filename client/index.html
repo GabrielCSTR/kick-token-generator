@@ -2,34 +2,133 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kick Token Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#121212">
+    <meta name="color-scheme" content="dark light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Kick Token Generator | Created by GBRLDEV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <meta name="description" content="Gere tokens de autenticação para a API da Kick.tv de forma segura e fácil. Semelhante ao TwitchTokenGenerator, mas para a plataforma Kick.">
 </head>
 <body>
-    <div class="container">
-        <h1>🎮 Kick Token Generator</h1>
-        <p>Gere tokens de acesso para a API da Kick.com de forma segura</p>
+    <header>
+        <div class="logo">
+            <img src="assets/logo.svg" alt="Kick Token Generator Logo">
+        </div>
+        <a href="https://github.com/seu-usuario/kick-token-generator" target="_blank" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="container fade-in">
+        <div class="section-heading">
+            <div class="section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#53fc18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            Gerador de Tokens para a API da Kick
+        </div>
         
-        <div class="form-group">
-            <label for="scopes">Selecione os Scopes:</label>
-            <div class="scopes-container">
-                <label><input type="checkbox" value="user:read" checked> user:read - Ler informações do usuário</label>
-                <label><input type="checkbox" value="chat:read"> chat:read - Ler mensagens do chat</label>
-                <label><input type="checkbox" value="chat:write"> chat:write - Enviar mensagens no chat</label>
-                <label><input type="checkbox" value="channel:read"> channel:read - Ler informações do canal</label>
-                <!-- Adicione mais scopes conforme a documentação da Kick -->
+        <p class="section-description">
+            Esta ferramenta permite gerar tokens de acesso OAuth para a API da Kick.tv de forma segura.
+            Selecione os escopos necessários para sua aplicação e clique no botão para gerar os tokens.
+        </p>
+
+        <div class="alert alert-warning">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+                <div class="alert-title">Atenção à segurança</div>
+                <div class="alert-message">
+                    Nunca compartilhe seus tokens de acesso. Eles fornecem acesso à sua conta Kick e 
+                    podem ser usados para realizar ações em seu nome.
+                </div>
             </div>
         </div>
 
-        <button id="generateBtn" class="btn-primary">
-            🔑 Gerar Token
-        </button>
-
-        <div class="warning">
-            ⚠️ <strong>Importante:</strong> Nunca compartilhe seus tokens! Eles dão acesso à sua conta Kick.
+        <div class="section-heading">
+            <div class="section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#53fc18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            Selecione os Escopos Necessários
         </div>
+
+        <div class="scopes-grid">
+            <div class="scope-item">
+                <input type="checkbox" id="user-read" class="scope-checkbox" value="user:read" checked>
+                <div class="scope-info">
+                    <label for="user-read" class="scope-name">user:read</label>
+                    <div class="scope-description">Acesso para ler informações do seu perfil de usuário</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="chat-read" class="scope-checkbox" value="chat:read">
+                <div class="scope-info">
+                    <label for="chat-read" class="scope-name">chat:read</label>
+                    <div class="scope-description">Acesso para ler mensagens de chat dos canais</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="chat-write" class="scope-checkbox" value="chat:write">
+                <div class="scope-info">
+                    <label for="chat-write" class="scope-name">chat:write</label>
+                    <div class="scope-description">Acesso para enviar mensagens no chat como você</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="channel-read" class="scope-checkbox" value="channel:read">
+                <div class="scope-info">
+                    <label for="channel-read" class="scope-name">channel:read</label>
+                    <div class="scope-description">Acesso para ler informações dos canais</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="channel-subscriptions" class="scope-checkbox" value="channel:subscriptions">
+                <div class="scope-info">
+                    <label for="channel-subscriptions" class="scope-name">channel:subscriptions</label>
+                    <div class="scope-description">Acesso para visualizar informações de assinaturas do canal</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="channel-follows" class="scope-checkbox" value="channel:follows">
+                <div class="scope-info">
+                    <label for="channel-follows" class="scope-name">channel:follows</label>
+                    <div class="scope-description">Acesso para ver seus seguidores e canais que você segue</div>
+                </div>
+            </div>
+        </div>
+
+        <button id="generateBtn" class="btn btn-primary btn-block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Gerar Token de Acesso
+        </button>
     </div>
+
+    <footer class="footer">
+        <p>
+            Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
+            Inspirado no <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
+        </p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
