@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/main.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "client/assets/$1"
+    },
+    {
+      "src": "/callback.html",
+      "dest": "client/callback.html"
+    },
+    {
+      "src": "/script.js",
+      "dest": "client/script.js"
+    },
+    {
+      "src": "/style.css",
+      "dest": "client/style.css"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "client/assets/favicon.svg"
+    },
+    {
+      "src": "/",
+      "dest": "client/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/main.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    }
+  ]
+}
