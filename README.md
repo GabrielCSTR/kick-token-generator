@@ -1,98 +1,147 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Kick Token Generator
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![Kick Token Generator Logo](./client/assets/logo.svg)
 
-## Description
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/seu-usuario/kick-token-generator/graphs/commit-activity)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</div>
 
-## Project setup
+## 📋 Overview
 
-```bash
-$ yarn install
+This project is a secure OAuth token generator for the Kick.tv API, similar to [TwitchTokenGenerator](https://twitchtokengenerator.com), but specifically designed for the Kick platform. The tool facilitates the development of applications and integrations with the Kick.tv platform by securely generating and managing access tokens efficiently.
+
+![Kick Token Generator Screenshot](./kick-token-generator.png)
+
+## ✨ Features
+
+- 🎨 Modern and user-friendly interface with Kick.tv theme
+- 🔐 Secure OAuth token generation using PKCE (Proof Key for Code Exchange)
+- 🔍 Custom scope selection for API access
+- 🔄 Access token renewal using refresh tokens
+- 📋 One-click token copy functionality
+- 📱 Responsive design for mobile devices
+
+## 🛠️ Technologies Used
+
+- **Backend**: NestJS (Node.js)
+- **Frontend**: HTML, CSS, and vanilla JavaScript
+- **Authentication**: OAuth 2.0 with PKCE
+- **Security**: Express-session for session management
+
+## ⚙️ Prerequisites
+
+- Node.js (v16.x or higher)
+- npm or yarn
+- A registered application on the Kick.tv developer platform
+
+## 📥 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/gabrielcstr/kick-token-generator.git
+   cd kick-token-generator
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env` file in the project root with the following variables:
+   ```
+   PORT=3000
+   SESSION_SECRET=your_secret_here
+   KICK_CLIENT_ID=your_client_id_here
+   KICK_CLIENT_SECRET=your_client_secret_here
+   KICK_REDIRECT_URI=http://localhost:3000/auth/callback
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run start:dev
+   # or
+   yarn start:dev
+   ```
+
+5. Access the application at `http://localhost:3000`
+
+## 📚 Usage Guide
+
+1. Access the homepage and select the scopes you want for your token
+2. Click "Generate Access Token"
+3. Log in to your Kick.tv account (if necessary)
+4. Authorize the application to access your account
+5. You'll be redirected back to the generator with your tokens
+
+## 🔧 Development
+
+### Project Structure
+
+```
+kick-token-generator/
+├── client/              # Static frontend
+│   ├── assets/          # Images and static resources
+│   ├── index.html       # Home page
+│   ├── callback.html    # Authentication callback page
+│   ├── script.js        # Frontend JavaScript
+│   └── style.css        # CSS styles
+├── src/                 # Backend code
+│   ├── auth/            # Authentication module
+│   │   ├── auth.controller.ts
+│   │   ├── auth.module.ts
+│   │   └── auth.service.ts
+│   ├── app.module.ts    # Main NestJS module
+│   └── main.ts          # Application entry point
+└── ...                  # Configuration files and dependencies
 ```
 
-## Compile and run the project
+## 🤝 Contributing
 
-```bash
-# development
-$ yarn run start
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-# watch mode
-$ yarn run start:dev
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/new-functionality`)
+3. Commit your changes (`git commit -m 'Add new functionality'`)
+4. Push to the branch (`git push origin feature/new-functionality`)
+5. Open a Pull Request
 
-# production mode
-$ yarn run start:prod
-```
+## 📝 License
 
-## Run tests
+This project is licensed under the [MIT License](LICENSE).
 
-```bash
-# unit tests
-$ yarn run test
+## ⚠️ Disclaimer
 
-# e2e tests
-$ yarn run test:e2e
+This project is not officially affiliated with Kick.tv. It is an independent tool created to assist developers.
 
-# test coverage
-$ yarn run test:cov
-```
+## 👨‍💻 About the Developer
 
-## Deployment
+Hello! I'm Gabriel, a passionate full-stack developer dedicated to creating solutions that make other developers' lives easier. With experience in JavaScript/TypeScript ecosystems and specialization in APIs and authentication services, I'm always striving to develop useful tools for the community.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- 🌐 [Website](https://gbrldev.com)
+- 📱 [LinkedIn](https://linkedin.com/in/gabriel-ferreira)
+- 🐱 [GitHub](https://github.com/gabrielcstr)
+- 📧 Email: [gabriel.developed@gmail.com.com](mailto:gabriel.developed@gmail.com.com)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## ☕ Support the Project
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
-```
+If you found this project useful and would like to support ongoing development and maintenance, consider buying me a coffee! Your contribution helps keep this project active and develop new features.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+<div align="center">
+  <a href="https://www.buymeacoffee.com/gabriel.dev" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" width="217">
+  </a>
+  <br>
+  <a href="https://ko-fi.com/gabriel.dev" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi" height="30">
+  </a>
+</div>
 
-## Resources
+## 🙏 Credits
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Inspired by [TwitchTokenGenerator](https://twitchtokengenerator.com) created by Nate Mielnik.
