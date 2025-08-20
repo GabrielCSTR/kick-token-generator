@@ -288,10 +288,10 @@
                             infoAlert.innerHTML = `
                                 <div class="alert-icon">💾</div>
                                 <div class="alert-content">
-                                    <div class="alert-title">Credenciais salvas temporariamente</div>
+                                    <div class="alert-title">Credentials temporarily saved</div>
                                     <div class="alert-message">
-                                        Suas credenciais estão salvas temporariamente para permitir a renovação do token. 
-                                        Fechar a aba ou o navegador as apagará.
+                                        Your credentials are temporarily saved to allow token renewal.
+                                        Closing the tab or browser will erase them.
                                     </div>
                                 </div>
                             `;
@@ -304,10 +304,10 @@
                             warningAlert.innerHTML = `
                                 <div class="alert-icon">⚠️</div>
                                 <div class="alert-content">
-                                    <div class="alert-title">Credenciais não encontradas</div>
+                                    <div class="alert-title">Credentials not found</div>
                                     <div class="alert-message">
-                                        Suas credenciais não estão mais disponíveis. A renovação de token não será possível.
-                                        Por favor, retorne à página inicial se precisar renovar seu token.
+                                        Your credentials are no longer available. Token renewal will not be possible.
+                                        Please return to the home page if you need to renew your token.
                                     </div>
                                 </div>
                             `;
@@ -318,7 +318,7 @@
                 if (scope) {
                     document.getElementById('scopes').textContent = scope.split(' ').join(', ');
                 } else {
-                    document.getElementById('scopes').textContent = 'Nenhum escopo específico';
+                    document.getElementById('scopes').textContent = 'No specific scope';
                 }
             }
         }
@@ -346,7 +346,7 @@
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
-                    Copiado!
+                    Copied!
                 `;
                 
                 // Adicionar vibração em dispositivos móveis para feedback tátil
@@ -354,7 +354,7 @@
                     navigator.vibrate(50);
                 }
             } catch (err) {
-                console.error('Falha ao copiar texto: ', err);
+                console.error('Failed to copy text: ', err);
                 
                 button.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -362,7 +362,7 @@
                         <line x1="15" y1="9" x2="9" y2="15"></line>
                         <line x1="9" y1="9" x2="15" y2="15"></line>
                     </svg>
-                    Erro
+                    Error
                 `;
             }
             
@@ -384,7 +384,7 @@
                 const clientSecret = sessionStorage.getItem('kick_client_secret');
                 
                 if (!clientId || !clientSecret) {
-                    throw new Error('Credenciais de cliente não encontradas. Por favor, volte à página inicial e tente novamente.');
+                    throw new Error('Client credentials not found. Please return to the home page and try again.');
                 }
             
                 refreshBtn.disabled = true;
@@ -392,7 +392,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
                         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                     </svg>
-                    Renovando...
+                    Refreshing...
                 `;
                 
                 const response = await fetch('/auth/refresh', {
@@ -416,7 +416,7 @@
                         const hours = Math.floor(data.expires_in / 3600);
                         const minutes = Math.floor((data.expires_in % 3600) / 60);
                         document.getElementById('expires-in').textContent = 
-                            `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                            `${hours} hour${hours !== 1 ? 's' : ''} and ${minutes} minute${minutes !== 1 ? 's' : ''}`;
                     }
                     
                     if (data.refresh_token) {
@@ -430,8 +430,8 @@
                     successAlert.innerHTML = `
                         <div class="alert-icon">✅</div>
                         <div class="alert-content">
-                            <div class="alert-title">Token renovado</div>
-                            <div class="alert-message">O access token foi renovado com sucesso.</div>
+                            <div class="alert-title">Token renewed</div>
+                            <div class="alert-message">The access token has been successfully renewed.</div>
                         </div>
                     `;
                     
@@ -449,15 +449,13 @@
                 const errorAlert = document.createElement('div');
                 errorAlert.className = 'alert alert-danger fade-in';
                 errorAlert.style.marginTop = '1rem';
-                errorAlert.innerHTML = `
+                    errorAlert.innerHTML = `
                     <div class="alert-icon">❌</div>
                     <div class="alert-content">
-                        <div class="alert-title">Erro ao renovar</div>
+                        <div class="alert-title">Error renewing</div>
                         <div class="alert-message">${error.message}</div>
                     </div>
-                `;
-                
-                document.getElementById('success-container').appendChild(errorAlert);
+                `;                document.getElementById('success-container').appendChild(errorAlert);
                 
                 // Remove a notificação após 5 segundos
                 setTimeout(() => {

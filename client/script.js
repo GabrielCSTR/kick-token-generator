@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
                     <line x1="1" y1="1" x2="23" y2="23"></line>
                 </svg>
-                Ocultar
+                Hide
             `;
     });
   }
@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
       errorAlert.innerHTML = `
                 <div class="alert-icon">❌</div>
                 <div class="alert-content">
-                    <div class="alert-title">Campos obrigatórios</div>
+                    <div class="alert-title">Required fields</div>
                     <div class="alert-message">
-                        Por favor, preencha o CLIENT ID e CLIENT SECRET para continuar.
+                        Please fill in the CLIENT ID and CLIENT SECRET to continue.
                     </div>
                 </div>
             `;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
                 <path d="M12 8v4l2 2"></path>
             </svg>
-            Redirecionando...
+            Redirecting...
         `;
 
     // Adicionar estilo de animação para o ícone girar
@@ -118,9 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
       errorAlert.innerHTML = `
                 <div class="alert-icon">❌</div>
                 <div class="alert-content">
-                    <div class="alert-title">Nenhum escopo selecionado</div>
+                    <div class="alert-title">No scope selected</div>
                     <div class="alert-message">
-                        Por favor, selecione pelo menos um escopo para continuar.
+                        Please select at least one scope to continue.
                     </div>
                 </div>
             `;
