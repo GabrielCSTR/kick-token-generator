@@ -70,23 +70,7 @@
                 <input type="checkbox" id="user-read" class="scope-checkbox" value="user:read" checked>
                 <div class="scope-info">
                     <label for="user-read" class="scope-name">user:read</label>
-                    <div class="scope-description">Acesso para ler informações do seu perfil de usuário</div>
-                </div>
-            </div>
-            
-            <div class="scope-item">
-                <input type="checkbox" id="chat-read" class="scope-checkbox" value="chat:read">
-                <div class="scope-info">
-                    <label for="chat-read" class="scope-name">chat:read</label>
-                    <div class="scope-description">Acesso para ler mensagens de chat dos canais</div>
-                </div>
-            </div>
-            
-            <div class="scope-item">
-                <input type="checkbox" id="chat-write" class="scope-checkbox" value="chat:write">
-                <div class="scope-info">
-                    <label for="chat-write" class="scope-name">chat:write</label>
-                    <div class="scope-description">Acesso para enviar mensagens no chat como você</div>
+                    <div class="scope-description">Visualize informações do usuário no Kick, incluindo nome de usuário, ID do streamer, etc.</div>
                 </div>
             </div>
             
@@ -94,23 +78,47 @@
                 <input type="checkbox" id="channel-read" class="scope-checkbox" value="channel:read">
                 <div class="scope-info">
                     <label for="channel-read" class="scope-name">channel:read</label>
-                    <div class="scope-description">Acesso para ler informações dos canais</div>
+                    <div class="scope-description">Veja informações do canal no Kick, incluindo descrição do canal, categoria, etc.</div>
                 </div>
             </div>
             
             <div class="scope-item">
-                <input type="checkbox" id="channel-subscriptions" class="scope-checkbox" value="channel:subscriptions">
+                <input type="checkbox" id="channel-write" class="scope-checkbox" value="channel:write">
                 <div class="scope-info">
-                    <label for="channel-subscriptions" class="scope-name">channel:subscriptions</label>
-                    <div class="scope-description">Acesso para visualizar informações de assinaturas do canal</div>
+                    <label for="channel-write" class="scope-name">channel:write</label>
+                    <div class="scope-description">Atualizar metadados de transmissão ao vivo para um canal com base no ID do canal</div>
                 </div>
             </div>
             
             <div class="scope-item">
-                <input type="checkbox" id="channel-follows" class="scope-checkbox" value="channel:follows">
+                <input type="checkbox" id="chat-write" class="scope-checkbox" value="chat:write">
                 <div class="scope-info">
-                    <label for="channel-follows" class="scope-name">channel:follows</label>
-                    <div class="scope-description">Acesso para ver seus seguidores e canais que você segue</div>
+                    <label for="chat-write" class="scope-name">chat:write</label>
+                    <div class="scope-description">Envie mensagens de bate-papo e permita que bots de bate-papo postem em seu bate-papo</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="streamkey-read" class="scope-checkbox" value="streamkey:read">
+                <div class="scope-info">
+                    <label for="streamkey-read" class="scope-name">streamkey:read</label>
+                    <div class="scope-description">Leia o URL de fluxo e a chave de fluxo de um usuário</div>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <input type="checkbox" id="events-subscribe" class="scope-checkbox" value="events:subscribe">
+                <div class="scope-info">
+                    <label for="events-subscribe" class="scope-name">events:subscribe</label>
+                    <div class="scope-description">Assine todos os eventos do canal no Kick, por exemplo, mensagens de bate-papo, seguidores, assinaturas</div>
+                </div>
+            </div>
+
+             <div class="scope-item">
+                <input type="checkbox" id="moderation-ban" class="scope-checkbox" value="moderation:ban">
+                <div class="scope-info">
+                    <label for="moderation-ban" class="scope-name">moderation:ban</label>
+                    <div class="scope-description">Executar ações de moderação para moderadores</div>
                 </div>
             </div>
         </div>
