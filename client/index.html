@@ -41,7 +41,7 @@
         
         <p class="section-description">
             Esta ferramenta permite gerar tokens de acesso OAuth para a API da Kick.tv de forma segura.
-            Selecione os escopos necessários para sua aplicação e clique no botão para gerar os tokens.
+            Insira suas credenciais de aplicativo e selecione os escopos necessários para sua aplicação.
         </p>
 
         <div class="alert alert-warning">
@@ -49,10 +49,43 @@
             <div class="alert-content">
                 <div class="alert-title">Atenção à segurança</div>
                 <div class="alert-message">
-                    Nunca compartilhe seus tokens de acesso. Eles fornecem acesso à sua conta Kick e 
-                    podem ser usados para realizar ações em seu nome.
+                    Nunca compartilhe seus tokens de acesso ou suas credenciais de aplicativo. 
+                    Eles fornecem acesso à sua conta Kick e podem ser usados para realizar ações em seu nome.
                 </div>
             </div>
+        </div>
+
+        <div class="section-heading">
+            <div class="section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#53fc18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <path d="M3 9h18"></path>
+                    <path d="M9 21V9"></path>
+                </svg>
+            </div>
+            Suas Credenciais de Aplicativo
+        </div>
+
+        <div class="token-container">
+            <div class="token-field">
+                <input type="text" id="client-id" placeholder="CLIENT ID" required>
+            </div>
+            
+            <div class="token-field">
+                <input type="password" id="client-secret" placeholder="CLIENT SECRET" required>
+                <button id="toggle-secret" class="btn-copy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    Mostrar
+                </button>
+            </div>
+
+            <p class="helper-text">
+                Para obter suas credenciais, você precisa registrar um aplicativo no 
+                <a href="https://kick.com/developer" target="_blank">Painel de Desenvolvedores da Kick</a>.
+            </p>
         </div>
 
         <div class="section-heading">
@@ -134,6 +167,7 @@
     <footer class="footer">
         <p>
             Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
+            Essa ferramenta foi criada por <a href="https://gbrldev.com.br" target="_blank">GBRLDEV</a> <br>
             Inspirado no <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
         </p>
     </footer>

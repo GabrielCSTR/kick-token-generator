@@ -29,6 +29,30 @@
     </header>
 
     <div class="container fade-in">
+        <!-- Container de loading - inicialmente escondido -->
+        <div id="loading-container" class="fade-in" style="display: none;">
+            <div class="section-heading">
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#53fc18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
+                        <path d="M12 8v4l2 2"></path>
+                    </svg>
+                </div>
+                Processando Token
+            </div>
+            
+            <div class="alert alert-warning">
+                <div class="alert-icon">⌛</div>
+                <div class="alert-content">
+                    <div class="alert-title">Finalizando autenticação</div>
+                    <div class="alert-message">
+                        Usando suas credenciais para completar a autenticação. Por favor, aguarde...
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Container de erro - inicialmente escondido -->
         <div id="error-container" class="fade-in" style="display: none;">
             <div class="section-heading">
@@ -52,7 +76,7 @@
                 </div>
             </div>
 
-            <a href="index-new.html" class="btn btn-primary btn-block">
+            <a href="index.html" class="btn btn-primary btn-block">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
@@ -148,24 +172,78 @@
             
             <div class="token-container">
                 <label class="token-label">Como usar o token na API</label>
-                <pre style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 15px; color: var(--text-color); overflow-x: auto; margin-bottom: 0;">curl -H "Authorization: Bearer YOUR_ACCESS_TOKEN" https://kick.com/api/v1/user</pre>
+                <pre style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 15px; color: var(--text-color); overflow-x: auto; margin-bottom: 0; white-space: pre-wrap; word-break: break-word;">curl --location 'https://api.kick.com/public/v1/chat' \
+--header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+--header 'Content-Type: application/json' \
+--data '{
+    "content": "Olá do meu bot!",
+    "type": "bot"
+}'</pre>
             </div>
         </div>
     </div>
 
-    <footer class="footer">
+     <footer class="footer">
         <p>
             Kick Token Generator © 2025 | Não afiliado oficialmente à Kick.tv <br>
-            Inspirado no <a href="https://twitchtokengenerator.com" target="_blank">TwitchTokenGenerator</a>
+            Essa ferramenta foi criada por <a href="https://gbrldev.com.br" target="_blank">GBRLDEV</a> <br>
         </p>
     </footer>
 
     <script>
+        // Adicionar estilo de animação para o ícone girar
+        const style = document.createElement('style');
+        style.textContent = `
+            .spin {
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
         // Parse URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
         
-        if (error) {
+        // Função para continuar o processo de autenticação com o clientSecret
+        async function continueWithClientSecret() {
+            try {
+                // Mostrar o container de loading
+                document.getElementById('loading-container').style.display = 'block';
+                
+                // Recuperar o client secret do sessionStorage
+                const clientSecret = sessionStorage.getItem('kick_client_secret');
+                const clientId = sessionStorage.getItem('kick_client_id');
+                console.log('Credenciais recuperadas:', {
+                    hasClientId: !!clientId,
+                    hasClientSecret: !!clientSecret,
+                    clientSecretLength: clientSecret ? clientSecret.length : 0
+                });
+                
+                if (!clientSecret) {
+                    throw new Error('CLIENT SECRET não encontrado. Por favor, volte e tente novamente.');
+                }
+                
+                // Redirecionar para a URL de callback com o client secret
+                const callbackUrl = `/auth/callback?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}&client_secret=${encodeURIComponent(clientSecret)}`;
+                console.log('Redirecionando para:', callbackUrl);
+                window.location.href = callbackUrl;
+            } catch (error) {
+                document.getElementById('loading-container').style.display = 'none';
+                document.getElementById('error-container').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+
+        // Se tem código e state, mas não tem accessToken nem error, precisamos do client secret
+        if (code && state && !urlParams.get('access_token') && !error) {
+            continueWithClientSecret();
+        } else if (error) {
             document.getElementById('error-container').style.display = 'block';
             document.getElementById('error-message').textContent = error;
         } else {
@@ -175,31 +253,68 @@
             const scope = urlParams.get('scope');
             const tokenType = urlParams.get('token_type');
 
-            if (accessToken) {
-                document.getElementById('success-container').style.display = 'block';
-                document.getElementById('access-token').value = accessToken;
-                
-                // Formato de expiração mais amigável
-                if (expiresIn) {
-                    const hours = Math.floor(expiresIn / 3600);
-                    const minutes = Math.floor((expiresIn % 3600) / 60);
-                    document.getElementById('expires-in').textContent = 
-                        `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
-                } else {
-                    document.getElementById('expires-in').textContent = 'Desconhecido';
-                }
-                
-                // Tipo do token
-                document.getElementById('token-type').textContent = tokenType || 'Bearer';
-                
-                // Se houver refresh token, mostra a seção
-                if (refreshToken) {
-                    document.getElementById('refresh-container').style.display = 'block';
-                    document.getElementById('refresh-token').value = refreshToken;
-                    document.getElementById('refresh-btn').style.display = 'inline-flex';
-                }
-                
-                // Formata os escopos de forma mais legível
+                if (accessToken) {
+                    document.getElementById('success-container').style.display = 'block';
+                    document.getElementById('access-token').value = accessToken;
+                    
+                    // Formato de expiração mais amigável
+                    if (expiresIn) {
+                        const hours = Math.floor(expiresIn / 3600);
+                        const minutes = Math.floor((expiresIn % 3600) / 60);
+                        document.getElementById('expires-in').textContent = 
+                            `${hours} hora${hours !== 1 ? 's' : ''} e ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
+                    } else {
+                        document.getElementById('expires-in').textContent = 'Desconhecido';
+                    }
+                    
+                    // Tipo do token
+                    document.getElementById('token-type').textContent = tokenType || 'Bearer';
+                    
+                    // Se houver refresh token, mostra a seção
+                    if (refreshToken) {
+                        document.getElementById('refresh-container').style.display = 'block';
+                        document.getElementById('refresh-token').value = refreshToken;
+                        document.getElementById('refresh-btn').style.display = 'inline-flex';
+                        
+                        // Verificar se temos as credenciais ainda
+                        const clientId = sessionStorage.getItem('kick_client_id');
+                        const clientSecret = sessionStorage.getItem('kick_client_secret');
+                        
+                        if (clientId && clientSecret) {
+                            // Adicionar alerta informativo
+                            const infoAlert = document.createElement('div');
+                            infoAlert.className = 'alert alert-success';
+                            infoAlert.style.marginTop = '1rem';
+                            infoAlert.innerHTML = `
+                                <div class="alert-icon">💾</div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Credenciais salvas temporariamente</div>
+                                    <div class="alert-message">
+                                        Suas credenciais estão salvas temporariamente para permitir a renovação do token. 
+                                        Fechar a aba ou o navegador as apagará.
+                                    </div>
+                                </div>
+                            `;
+                            document.getElementById('refresh-container').appendChild(infoAlert);
+                        } else {
+                            // Adicionar alerta de aviso
+                            const warningAlert = document.createElement('div');
+                            warningAlert.className = 'alert alert-warning';
+                            warningAlert.style.marginTop = '1rem';
+                            warningAlert.innerHTML = `
+                                <div class="alert-icon">⚠️</div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Credenciais não encontradas</div>
+                                    <div class="alert-message">
+                                        Suas credenciais não estão mais disponíveis. A renovação de token não será possível.
+                                        Por favor, retorne à página inicial se precisar renovar seu token.
+                                    </div>
+                                </div>
+                            `;
+                            document.getElementById('refresh-container').appendChild(warningAlert);
+                            document.getElementById('refresh-btn').style.display = 'none';
+                        }
+                    }                // Formata os escopos de forma mais legível
                 if (scope) {
                     document.getElementById('scopes').textContent = scope.split(' ').join(', ');
                 } else {
@@ -235,7 +350,7 @@
                 `;
                 
                 // Adicionar vibração em dispositivos móveis para feedback tátil
-                if (navigator.vibrate && isMobile) {
+                if (navigator.vibrate) {
                     navigator.vibrate(50);
                 }
             } catch (err) {
@@ -264,6 +379,14 @@
             const originalHTML = refreshBtn.innerHTML;
             
             try {
+                // Obter credenciais do cliente da sessionStorage
+                const clientId = sessionStorage.getItem('kick_client_id');
+                const clientSecret = sessionStorage.getItem('kick_client_secret');
+                
+                if (!clientId || !clientSecret) {
+                    throw new Error('Credenciais de cliente não encontradas. Por favor, volte à página inicial e tente novamente.');
+                }
+            
                 refreshBtn.disabled = true;
                 refreshBtn.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
@@ -277,7 +400,11 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ refresh_token: refreshToken }),
+                    body: JSON.stringify({ 
+                        refresh_token: refreshToken,
+                        client_id: clientId,
+                        client_secret: clientSecret
+                    }),
                 });
                 
                 const data = await response.json();

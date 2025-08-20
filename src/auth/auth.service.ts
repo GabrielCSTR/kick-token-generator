@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@nestjs/common';
 import { randomBytes, createHash } from 'crypto';
 import axios from 'axios';
@@ -10,12 +6,13 @@ import axios from 'axios';
 export class AuthService {
   private readonly kickAuthUrl = 'https://id.kick.com/oauth/authorize';
   private readonly kickTokenUrl = 'https://id.kick.com/oauth/token';
-
-  private readonly clientId = process.env.KICK_CLIENT_ID;
-  private readonly clientSecret = process.env.KICK_CLIENT_SECRET;
   private readonly redirectUri = process.env.KICK_REDIRECT_URI;
 
-  generateAuthUrl(scopes: string): {
+
+  generateAuthUrl(
+    scopes: string,
+    customClientId?: string,
+  ): {
     url: string;
     state: string;
     codeVerifier: string;
@@ -26,9 +23,11 @@ export class AuthService {
       createHash('sha256').update(codeVerifier).digest(),
     );
 
+    const clientId = customClientId;
+
     const params = new URLSearchParams({
       response_type: 'code',
-      client_id: this.clientId ?? '',
+      client_id: clientId ?? '',
       redirect_uri: this.redirectUri ?? '',
       scope: scopes,
       state,
@@ -43,19 +42,21 @@ export class AuthService {
     };
   }
 
-  async exchangeCodeForToken(code: string, codeVerifier: string) {
-    console.log('Exchange code for token:', {
-      hasCode: !!code,
-      hasVerifier: !!codeVerifier,
-      redirectUri: this.redirectUri,
-    });
+  async exchangeCodeForToken(
+    code: string,
+    codeVerifier: string,
+    customClientId?: string,
+    customClientSecret?: string,
+  ) {
+    const clientId = customClientId;
+    const clientSecret = customClientSecret;
 
     const data = new URLSearchParams({
       grant_type: 'authorization_code',
       code: code ?? '',
       redirect_uri: this.redirectUri ?? '',
-      client_id: this.clientId ?? '',
-      client_secret: this.clientSecret ?? '',
+      client_id: clientId ?? '',
+      client_secret: clientSecret ?? '',
       code_verifier: codeVerifier ?? '',
     });
 
@@ -85,12 +86,19 @@ export class AuthService {
     }
   }
 
-  async refreshToken(refreshToken: string) {
+  async refreshToken(
+    refreshToken: string,
+    customClientId?: string,
+    customClientSecret?: string,
+  ) {
+    const clientId = customClientId;
+    const clientSecret = customClientSecret;
+
     const data = new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken ?? '',
-      client_id: this.clientId ?? '',
-      client_secret: this.clientSecret ?? '',
+      client_id: clientId ?? '',
+      client_secret: clientSecret ?? '',
     });
 
     try {
