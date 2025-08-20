@@ -1,49 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/main.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "client/**",
-      "use": "@vercel/static"
+  "framework": null,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
     }
-  ],
-  "routes": [
-    {
-      "src": "/auth/(.*)",
-      "dest": "dist/main.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "client/assets/$1"
-    },
-    {
-      "src": "/callback.html",
-      "dest": "client/callback.html"
-    },
-    {
-      "src": "/script.js",
-      "dest": "client/script.js"
-    },
-    {
-      "src": "/style.css",
-      "dest": "client/style.css"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "client/assets/favicon.svg"
-    },
-    {
-      "src": "/",
-      "dest": "client/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "dist/main.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
-    }
+  },
+  "outputDirectory": "client",
+  "rewrites": [
+    { "source": "/auth/login", "destination": "/api/server" },
+    { "source": "/auth/callback", "destination": "/api/server" },
+    { "source": "/auth/refresh", "destination": "/api/server" },
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }
