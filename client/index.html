@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kick Token Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Kick Token Generator</h1>
+        <p>Gere tokens de acesso para a API da Kick.com de forma segura</p>
+        
+        <div class="form-group">
+            <label for="scopes">Selecione os Scopes:</label>
+            <div class="scopes-container">
+                <label><input type="checkbox" value="user:read" checked> user:read - Ler informações do usuário</label>
+                <label><input type="checkbox" value="chat:read"> chat:read - Ler mensagens do chat</label>
+                <label><input type="checkbox" value="chat:write"> chat:write - Enviar mensagens no chat</label>
+                <label><input type="checkbox" value="channel:read"> channel:read - Ler informações do canal</label>
+                <!-- Adicione mais scopes conforme a documentação da Kick -->
+            </div>
+        </div>
+
+        <button id="generateBtn" class="btn-primary">
+            🔑 Gerar Token
+        </button>
+
+        <div class="warning">
+            ⚠️ <strong>Importante:</strong> Nunca compartilhe seus tokens! Eles dão acesso à sua conta Kick.
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -20,6 +20,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
+    "types": ["node", "express-session"],
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src", "typings"]
 }

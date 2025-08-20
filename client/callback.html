@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Gerado - Kick Token Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Token Gerado com Sucesso!</h1>
+        
+        <div id="error-container" class="error" style="display: none;">
+            <h2>❌ Erro</h2>
+            <p id="error-message"></p>
+            <a href="/" class="btn-secondary">Tentar Novamente</a>
+        </div>
+
+        <div id="success-container" style="display: none;">
+            <div class="token-container">
+                <h3>Access Token:</h3>
+                <div class="token-field">
+                    <input type="text" id="access-token" readonly>
+                    <button onclick="copyToken('access-token')" class="btn-copy">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="token-container" id="refresh-container" style="display: none;">
+                <h3>Refresh Token:</h3>
+                <div class="token-field">
+                    <input type="text" id="refresh-token" readonly>
+                    <button onclick="copyToken('refresh-token')" class="btn-copy">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <p><strong>Expira em:</strong> <span id="expires-in"></span></p>
+                <p><strong>Scopes:</strong> <span id="scopes"></span></p>
+                <p><strong>Tipo:</strong> <span id="token-type"></span></p>
+            </div>
+
+            <div class="actions">
+                <button id="refresh-btn" class="btn-secondary" style="display: none;">
+                    🔄 Renovar Token
+                </button>
+                <a href="/" class="btn-primary">Gerar Novo Token</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        
+        if (error) {
+            document.getElementById('error-container').style.display = 'block';
+            document.getElementById('error-message').textContent = error;
+        } else {
+            const accessToken = urlParams.get('access_token');
+            const refreshToken = urlParams.get('refresh_token');
+            const expiresIn = urlParams.get('expires_in');
+            const scope = urlParams.get('scope');
+            const tokenType = urlParams.get('token_type');
+
+            if (accessToken) {
+                document.getElementById('success-container').style.display = 'block';
+                document.getElementById('access-token').value = accessToken;
+                
+                if (refreshToken) {
+                    document.getElementById('refresh-container').style.display = 'block';
+                    document.getElementById('refresh-token').value = refreshToken;
+                    document.getElementById('refresh-btn').style.display = 'inline-block';
+                }
+                
+                document.getElementById('expires-in').textContent = expiresIn ? `${expiresIn} segundos` : 'N/A';
+                document.getElementById('scopes').textContent = scope || 'N/A';
+                document.getElementById('token-type').textContent = tokenType || 'Bearer';
+            }
+        }
+
+        function copyToken(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            const button = element.nextElementSibling;
+            const originalText = button.textContent;
+            button.textContent = '✅ Copiado!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        // Refresh token functionality
+        document.getElementById('refresh-btn')?.addEventListener('click', async () => {
+            const refreshToken = document.getElementById('refresh-token').value;
+            
+            try {
+                const response = await fetch('/auth/refresh', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ refresh_token: refreshToken }),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('access-token').value = data.access_token;
+                    if (data.refresh_token) {
+                        document.getElementById('refresh-token').value = data.refresh_token;
+                    }
+                    alert('Token renovado com sucesso!');
+                } else {
+                    alert('Erro ao renovar token: ' + (data.message || 'Erro desconhecido'));
+                }
+            } catch (error) {
+                alert('Erro ao renovar token: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

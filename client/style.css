@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+.scopes-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.scopes-container label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.scopes-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.btn-primary, .btn-secondary, .btn-copy {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+    margin-right: 10px;
+}
+
+.btn-copy {
+    background: #28a745;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.token-container {
+    margin-bottom: 20px;
+}
+
+.token-container h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.token-field {
+    display: flex;
+    gap: 10px;
+}
+
+.token-field input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.info-container {
+    background: #e7f3ff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.info-container p {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.actions {
+    text-align: center;
+}
