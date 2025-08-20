@@ -126,7 +126,7 @@ Hello! I'm Gabriel, a passionate full-stack developer dedicated to creating solu
 - 🌐 [Website](https://gbrldev.com)
 - 📱 [LinkedIn](https://linkedin.com/in/gabriel-ferreira)
 - 🐱 [GitHub](https://github.com/gabrielcstr)
-- 📧 Email: [gabriel.developed@gmail.com.com](mailto:gabriel.developed@gmail.com.com)
+- 📧 Email: [gabriel.developed@gmail.com](mailto:gabriel.developed@gmail.com)
 
 ## ☕ Support the Project
 
